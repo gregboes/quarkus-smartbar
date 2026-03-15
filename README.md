@@ -1,3 +1,10 @@
+# COMMANDES 
+```
+mvn clean quarkus:dev
+```
+
+# MODEL DE DONNEES BACKOFFICE
+
 ```mermaid
 classDiagram
     class Category {
