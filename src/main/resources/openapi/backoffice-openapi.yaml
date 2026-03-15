@@ -1,0 +1,261 @@
+openapi: 3.1.0
+
+info:
+  title: Smartbar Backoffice API
+  description: Smartbar Backoffice API
+  version: 1.0.0
+
+paths:
+  /categories:
+    get:
+      tags:
+        - Categories
+      summary: Get all categories
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+
+    post:
+      tags:
+        - Categories
+      summary: Create a category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "201":
+          $ref: "#/components/responses/Created"
+
+  /categories/{categoryId}:
+    parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      tags:
+        - Categories
+      summary: Get a category by id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+
+    put:
+      tags:
+        - Categories
+      summary: Update a category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "200":
+          description: Entity successfully updated
+
+    delete:
+      tags:
+        - Categories
+      summary: Delete a category
+      responses:
+        "200":
+          description: Entity successfully deleted
+
+  /articles:
+    get:
+      tags:
+        - Articles
+      summary: Get all articles
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+
+    post:
+      tags:
+        - Articles
+      summary: Create an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Article"
+      responses:
+        "201":
+          $ref: "#/components/responses/Created"
+
+  /articles/{articleId}:
+    parameters:
+      - name: articleId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      tags:
+        - Articles
+      summary: Get an article by id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+
+    put:
+      tags:
+        - Articles
+      summary: Update an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Article"
+      responses:
+        "200":
+          description: Entity successfully updated
+
+    delete:
+      tags:
+        - Articles
+      summary: Delete an article
+      responses:
+        "200":
+          description: Entity successfully deleted
+
+  /tables:
+    get:
+      tags:
+        - Tables
+      summary: Get all tables
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Table"
+
+    post:
+      tags:
+        - Tables
+      summary: Create a table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Table"
+      responses:
+        "201":
+          $ref: "#/components/responses/Created"
+
+  /tables/{tableId}:
+    parameters:
+      - name: tableId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      tags:
+        - Tables
+      summary: Get a table by id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+
+    put:
+      tags:
+        - Tables
+      summary: Update a table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Table"
+      responses:
+        "200":
+          description: Entity successfully updated
+
+    delete:
+      tags:
+        - Tables
+      summary: Delete a table
+      responses:
+        "200":
+          description: Entity successfully deleted
+
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+
+    Article:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        picture:
+          type: string
+
+    Table:
+      type: object
+      properties:
+        name:
+          type: string
+        seatCount:
+          type: integer
+        active:
+          type: boolean
+
+  responses:
+    Created:
+      description: Entity successfully created
+      headers:
+        Location:
+          description: URL of the created resource
+          schema:
+            type: string
