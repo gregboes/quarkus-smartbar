@@ -1,5 +1,6 @@
 package org.smartbar.backoffice.resources;
 
+import io.smallrye.common.annotation.NonBlocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.model.Category;
@@ -7,7 +8,7 @@ import org.smartbar.backoffice.model.Category;
 
 import java.util.List;
 
-@ApplicationScoped
+@NonBlocking
 public class DefaultCategoriesResource implements CategoriesResource {
 
     @Override
