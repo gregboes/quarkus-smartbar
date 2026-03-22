@@ -8,6 +8,7 @@ import org.smartbar.backoffice.model.Table;
 
 import java.util.List;
 
+@ApplicationScoped
 @NonBlocking
 public class TablesResourceImpl implements TablesResource {
 

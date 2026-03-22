@@ -8,6 +8,7 @@ import org.smartbar.backoffice.model.Category;
 
 import java.util.List;
 
+@ApplicationScoped
 @NonBlocking
 public class CategoriesResourceImpl implements CategoriesResource {
 

@@ -1,11 +1,13 @@
 package org.smartbar.backoffice.resources;
 
 import io.smallrye.common.annotation.NonBlocking;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.model.Article;
 
 import java.util.List;
 
+@ApplicationScoped
 @NonBlocking
 public class ArticlesResourceImpl implements ArticlesResource {
 
