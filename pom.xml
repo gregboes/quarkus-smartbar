@@ -4,7 +4,7 @@
     <groupId>org.smartbar</groupId>
     <artifactId>code-with-quarkus</artifactId>
     <version>1.0.0</version>
-    <packaging>quarkus</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
@@ -89,28 +89,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-openapi-spec-for-codegen</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/generated-sources/resources/openapi</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/resources/openapi</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
+<plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler-plugin.version}</version>
                 <configuration>
