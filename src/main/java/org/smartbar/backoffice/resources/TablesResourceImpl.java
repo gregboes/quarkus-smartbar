@@ -9,7 +9,7 @@ import org.smartbar.backoffice.model.Table;
 import java.util.List;
 
 @NonBlocking
-public class DefaultTableResource implements TablesResource {
+public class TablesResourceImpl implements TablesResource {
 
 
     @Override

@@ -1,16 +1,19 @@
 package org.smartbar.backoffice.resources;
 
 import io.smallrye.common.annotation.NonBlocking;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.model.Article;
-import org.smartbar.backoffice.model.Category;
 
 import java.util.List;
 
 @NonBlocking
-public class DefaultArticleResource implements ArticlesResource {
+public class ArticlesResourceImpl implements ArticlesResource {
 
+    private ArticlesService articlesService;
+
+    public ArticlesResourceImpl(ArticlesService articlesService){
+        this.articlesService = articlesService;
+    }
 
     @Override
     public Response articlesArticleIdDelete(String articleId) {
@@ -29,7 +32,7 @@ public class DefaultArticleResource implements ArticlesResource {
 
     @Override
     public List<Article> articlesGet() {
-        return List.of();
+        return List.of(articlesService.get());
     }
 
     @Override

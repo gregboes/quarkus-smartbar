@@ -9,7 +9,7 @@ import org.smartbar.backoffice.model.Category;
 import java.util.List;
 
 @NonBlocking
-public class DefaultCategoriesResource implements CategoriesResource {
+public class CategoriesResourceImpl implements CategoriesResource {
 
     @Override
     public Response categoriesCategoryIdDelete(String categoryId) {
