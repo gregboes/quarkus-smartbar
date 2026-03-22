@@ -2,6 +2,7 @@ package org.smartbar.backoffice.resources;
 
 import io.smallrye.common.annotation.NonBlocking;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.model.Category;
 
@@ -11,6 +12,13 @@ import java.util.List;
 @ApplicationScoped
 @NonBlocking
 public class CategoriesResourceImpl implements CategoriesResource {
+
+    @Inject
+    private CategoriesService categoriesService;
+
+    public CategoriesResourceImpl(CategoriesService categoriesService){
+        this.categoriesService = categoriesService;
+    }
 
     @Override
     public Response categoriesCategoryIdDelete(String categoryId) {
@@ -29,10 +37,7 @@ public class CategoriesResourceImpl implements CategoriesResource {
 
     @Override
     public List<Category> categoriesGet() {
-        return List.of(
-                new Category().name("Soft Drinks").description("Boissons sans alcool"),
-                new Category().name("Cocktails").description("Boissons alcoolisées")
-        );
+        return List.of(categoriesService.get());
     }
 
     @Override
