@@ -1,3 +1,8 @@
+
+![diagram](./images/appli_diagram.PNG)
+
+
+
 # code-with-quarkus
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
