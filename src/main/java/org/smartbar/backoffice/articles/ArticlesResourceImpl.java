@@ -1,9 +1,10 @@
-package org.smartbar.backoffice.resources;
+package org.smartbar.backoffice.articles;
 
 import io.smallrye.common.annotation.NonBlocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;
-import org.smartbar.backoffice.model.Article;
+import org.smartbar.backoffice.model.ApiArticle;
+import org.smartbar.backoffice.resources.ArticlesResource;
 
 import java.util.List;
 
@@ -23,22 +24,23 @@ public class ArticlesResourceImpl implements ArticlesResource {
     }
 
     @Override
-    public Article articlesArticleIdGet(String articleId) {
+    public ApiArticle articlesArticleIdGet(String articleId) {
         return null;
     }
 
     @Override
-    public Response articlesArticleIdPut(String articleId, Article article) {
+    public Response articlesArticleIdPut(String articleId, ApiArticle apiArticle) {
         return null;
     }
 
     @Override
-    public List<Article> articlesGet() {
-        return List.of(articlesService.get());
+    public List<ApiArticle> articlesGet() {
+        return List.of();
     }
 
     @Override
-    public Response articlesPost(Article article) {
+    public Response articlesPost(ApiArticle apiArticle) {
         return null;
     }
+
 }

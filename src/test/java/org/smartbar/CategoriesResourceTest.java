@@ -7,9 +7,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.smartbar.backoffice.model.Category;
-import org.smartbar.backoffice.resources.CategoriesService;
+import org.smartbar.backoffice.catgories.CategoriesService;
 
 import static io.restassured.RestAssured.given;
 
@@ -21,7 +19,7 @@ class CategoriesResourceTest {
 
     @BeforeEach
     void setUp() {
-        Mockito.when(categoriesService.get()).thenReturn(new Category().name("Mock"));
+//        Mockito.when(categoriesService.get()).thenReturn(new Category().name("Mock"));
     }
 
     @Test

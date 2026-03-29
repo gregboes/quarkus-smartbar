@@ -19,7 +19,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Category"
+                  $ref: "#/components/schemas/ApiCategory"
 
     post:
       tags:
@@ -30,7 +30,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Category"
+              $ref: "#/components/schemas/ApiCategory"
       responses:
         "201":
           $ref: "#/components/responses/Created"
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Category"
+                $ref: "#/components/schemas/ApiCategory"
 
     put:
       tags:
@@ -64,7 +64,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Category"
+              $ref: "#/components/schemas/ApiCategory"
       responses:
         "200":
           description: Entity successfully updated
@@ -90,7 +90,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Article"
+                  $ref: "#/components/schemas/ApiArticle"
 
     post:
       tags:
@@ -101,10 +101,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Article"
+              $ref: "#/components/schemas/ApiArticle"
       responses:
         "201":
-          $ref: "#/components/responses/Created"
+          $ref: "#/components/responses/ApiCreated"
 
   /articles/{articleId}:
     parameters:
@@ -124,7 +124,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Article"
+                $ref: "#/components/schemas/ApiArticle"
 
     put:
       tags:
@@ -135,7 +135,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Article"
+              $ref: "#/components/schemas/ApiArticle"
       responses:
         "200":
           description: Entity successfully updated
@@ -161,7 +161,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Table"
+                  $ref: "#/components/schemas/ApiTable"
 
     post:
       tags:
@@ -172,7 +172,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Table"
+              $ref: "#/components/schemas/ApiTable"
       responses:
         "201":
           $ref: "#/components/responses/Created"
@@ -195,7 +195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Table"
+                $ref: "#/components/schemas/ApiTable"
 
     put:
       tags:
@@ -206,7 +206,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Table"
+              $ref: "#/components/schemas/ApiTable"
       responses:
         "200":
           description: Entity successfully updated
@@ -221,7 +221,7 @@ paths:
 
 components:
   schemas:
-    Category:
+    ApiCategory:
       type: object
       properties:
         name:
@@ -229,7 +229,7 @@ components:
         description:
           type: string
 
-    Article:
+    ApiArticle:
       type: object
       properties:
         name:
@@ -241,7 +241,7 @@ components:
         picture:
           type: string
 
-    Table:
+    ApiTable:
       type: object
       properties:
         name:
