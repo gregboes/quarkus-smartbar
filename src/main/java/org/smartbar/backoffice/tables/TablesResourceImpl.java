@@ -27,13 +27,13 @@ public class TablesResourceImpl implements TablesResource {
 
 
     @Override
-    public Response tablesPost(ApiTable table) {
-        org.smartbar.backoffice.tables.Table newTable = new org.smartbar.backoffice.tables.Table();
-        newTable.setSeatCount(table.getSeatCount());
-        newTable.setActive(table.getActive());
-        newTable.setName(table.getName());
-        final org.smartbar.backoffice.tables.Table persistedTable = tablesService.persist(newTable);
-        return Response.created(URI.create("/tables/" + persistedTable.getId())).build();
+    public Response tablesPost(ApiTable apiTable) {
+        Table newTable = new Table(apiTable);
+        Table persistedTable = tablesService.persist(newTable);
+        return Response.created(
+            URI.create("/tables/" + persistedTable.getId())
+        )
+        .build();
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.smartbar.backoffice.tables;
 
 import jakarta.persistence.Entity;
 import org.smartbar.backoffice.BaseEntity;
+import org.smartbar.backoffice.model.ApiTable;
 
 @Entity
 @jakarta.persistence.Table(name = "bo_table")
@@ -17,6 +18,12 @@ public class Table extends BaseEntity {
         this.name = name;
         this.seatCount = seatCount;
         this.active = active;
+    }
+
+    public Table(ApiTable apiTable) {
+        this.name = apiTable.getName();
+        this.seatCount = apiTable.getSeatCount();
+        this.active = apiTable.getActive();
     }
 
     public String getName() {
