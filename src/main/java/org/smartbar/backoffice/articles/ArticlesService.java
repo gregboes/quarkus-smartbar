@@ -10,12 +10,12 @@ public class ArticlesService extends CrudService<Article> {
 
     public ArticlesService(){
         // Just for CDI requirements
-        super(null);
+        super(null, null);
     }
 
     @Inject
     public ArticlesService(EntityManager entityManager) {
-        super(entityManager);
+        super(entityManager, Article.class);
     }
 
     public Article get(){

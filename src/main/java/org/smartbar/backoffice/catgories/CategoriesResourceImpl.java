@@ -10,36 +10,49 @@ import org.smartbar.backoffice.resources.CategoriesResource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
-@NonBlocking
 public class CategoriesResourceImpl implements CategoriesResource {
 
+    private final CategoriesService categoriesService;
+    private final CategoryMapper mapper;
+
     @Inject
-    private CategoriesService categoriesService;
-
-    public CategoriesResourceImpl(CategoriesService categoriesService){
+    public CategoriesResourceImpl(CategoriesService categoriesService, CategoryMapper mapper) {
         this.categoriesService = categoriesService;
+        this.mapper = mapper;
     }
 
+    @Blocking
     @Override
-    public Response categoriesCategoryIdDelete(String categoryId) {
-        return Response.noContent().build();
+    public Response categoriesCategoryIdDelete(Long categoryId) {
+        categoriesService.delete(categoryId);
+        return Response.ok().build();
     }
 
+    @Blocking
     @Override
-    public ApiCategory categoriesCategoryIdGet(String categoryId) {
-        return new ApiCategory().name("Soft Drinks").description("Boissons sans alcool");
+    public ApiCategory categoriesCategoryIdGet(Long categoryId) {
+        return mapper.toDto(categoriesService.findById(categoryId));
     }
 
+    @Blocking
     @Override
-    public Response categoriesCategoryIdPut(String categoryId, ApiCategory category) {
-        return Response.ok(category).build();
+    public Response categoriesCategoryIdPut(Long categoryId, ApiCategory apiCategory) {
+        Category updatedCategory = new Category(apiCategory);
+        updatedCategory.setId(categoryId);
+        categoriesService.update(updatedCategory);
+        return Response.ok().build();
     }
 
+    @Blocking
     @Override
     public List<ApiCategory> categoriesGet() {
-        return List.of();
+        return categoriesService.findAll()
+            .stream()
+            .map(mapper::toDto)
+            .collect(Collectors.toList());
     }
 
     @Blocking

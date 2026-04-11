@@ -41,7 +41,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/id"
 
     get:
       tags:
@@ -96,6 +96,13 @@ paths:
       tags:
         - Articles
       summary: Create an article
+      parameters:
+        - name: x-category-id
+          in: header
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         required: true
         content:
@@ -112,7 +119,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/id"
 
     get:
       tags:
@@ -183,7 +190,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/id"
 
     get:
       tags:
@@ -221,9 +228,15 @@ paths:
 
 components:
   schemas:
+    id:
+      type: integer
+      format: int64
     ApiCategory:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         description:
@@ -232,6 +245,9 @@ components:
     ApiArticle:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         price:
@@ -244,6 +260,9 @@ components:
     ApiTable:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         seatCount:
