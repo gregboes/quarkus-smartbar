@@ -22,6 +22,8 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Article(){}
+
 
     public Article(String name, BigDecimal price, String description, String picture, Category category) {
         this.name = name;

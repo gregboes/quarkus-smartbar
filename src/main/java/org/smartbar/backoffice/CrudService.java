@@ -1,5 +1,6 @@
 package org.smartbar.backoffice;
 
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -14,15 +15,19 @@ public class CrudService<E> {
 
     private EntityManager entityManager;
     private Class<E> entityClass;
-    private CriteriaBuilder cb;
 
+
+    @Inject
     public CrudService(
         EntityManager entityManager,
         Class<E> entityClass
         ){
         this.entityManager = entityManager;
         this.entityClass = entityClass;
-        this.cb = entityManager.getCriteriaBuilder();
+    }
+
+    private CriteriaBuilder getCb() {
+        return entityManager.getCriteriaBuilder();
     }
 
     public E persist(E entity){
@@ -32,7 +37,9 @@ public class CrudService<E> {
     }
 
     public List<E> findAll() {
-        CriteriaQuery<E> query = cb.createQuery(entityClass);
+        // query = SELECT, Ce que doit retourner la query -> entityClass
+        CriteriaQuery<E> query = getCb().createQuery(entityClass);
+        // == FROM ...
         query.from(entityClass);
         return entityManager.createQuery(query).getResultList();
     }
@@ -59,7 +66,7 @@ public class CrudService<E> {
 
     // Exemple de requete pour un getName
     public List<String> getNames() {
-        CriteriaQuery<String> query = cb.createQuery(String.class);
+        CriteriaQuery<String> query = getCb().createQuery(String.class);
         Root<E> root = query.from(entityClass);
         query.select(root.get("name"));
         return entityManager.createQuery(query).getResultList();
@@ -68,12 +75,11 @@ public class CrudService<E> {
     public List<E> findByName(String name){
         // cb = boite a outil pour requetes
         // query = SELECT
-        CriteriaQuery<E> query = cb.createQuery(entityClass);
+        CriteriaQuery<E> query = getCb().createQuery(entityClass);
         // root désigne la table ex root.join
         Root<E> root = query.from(entityClass);
-        query.where(cb.equal(root.get("name"), name));
+        query.where(getCb().equal(root.get("name"), name));
         return entityManager.createQuery(query).getResultList();
     }
-
 
 }
