@@ -3,6 +3,7 @@ package org.smartbar.backoffice.articles;
 import com.oracle.svm.core.annotate.Inject;
 import io.smallrye.common.annotation.NonBlocking;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.catgories.CategoriesService;
 import org.smartbar.backoffice.catgories.Category;
@@ -12,6 +13,7 @@ import org.smartbar.backoffice.resources.ArticlesResource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -42,17 +44,24 @@ public class ArticlesResourceImpl implements ArticlesResource {
 
     @Override
     public ApiArticle articlesArticleIdGet(Long articleId) {
-        return mapper.toDto(articlesService.findById(articleId));
+        Optional<Article> article = articlesService.findById(articleId);
+        if(article.isEmpty()){
+            throw new NotFoundException("Article not found");
+        }
+        return mapper.toDto(article.get());
     }
 
     @Override
     public Response articlesArticleIdPut(Long articleId, ApiArticle apiArticle) {
-        Article existing = articlesService.findById(articleId);
-        existing.setName(apiArticle.getName());
-        existing.setPrice(apiArticle.getPrice());
-        existing.setDescription(apiArticle.getDescription());
-        existing.setPicture(apiArticle.getPicture());
-        articlesService.update(existing);
+        Optional<Article> existing = articlesService.findById(articleId);
+        if(existing.isEmpty()){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        existing.get().setName(apiArticle.getName());
+        existing.get().setPrice(apiArticle.getPrice());
+        existing.get().setDescription(apiArticle.getDescription());
+        existing.get().setPicture(apiArticle.getPicture());
+        articlesService.update(existing.get());
         return Response.ok().build();
     }
 
@@ -66,8 +75,11 @@ public class ArticlesResourceImpl implements ArticlesResource {
 
     @Override
     public Response articlesPost(Long xCategoryId, ApiArticle apiArticle) {
-        Category category = categoriesService.findById(xCategoryId);
-        Article newArticle = new Article(category, apiArticle);
+        Optional<Category> category = categoriesService.findById(xCategoryId);
+        if(category.isEmpty()){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        Article newArticle = new Article(category.get(), apiArticle);
         articlesService.persist(newArticle);
         return Response.created(
             URI.create("/articles/" + newArticle.getId())

@@ -3,6 +3,9 @@ package org.smartbar.backoffice.articles;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.smartbar.backoffice.BaseEntity;
 import org.smartbar.backoffice.catgories.Category;
 import org.smartbar.backoffice.model.ApiArticle;
@@ -10,10 +13,16 @@ import org.smartbar.backoffice.model.ApiArticle;
 import java.math.BigDecimal;
 
 @Entity
-@jakarta.persistence.Table(name = "bo_article")
+@jakarta.persistence.Table(name = "bo_article", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+})
 public class Article extends BaseEntity {
 
+    @NotNull
     private String name;
+
+    @NotNull
+    @Positive
     private BigDecimal price;
     private String description;
     private String picture;

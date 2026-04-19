@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public class CrudService<E> {
@@ -44,12 +45,8 @@ public class CrudService<E> {
         return entityManager.createQuery(query).getResultList();
     }
 
-    public E findById(Object id){
-        E entity = entityManager.find(entityClass, id);
-        if (entity == null) {
-            throw new NotFoundException("Entity not found with id: " + id);
-        }
-        return entity;
+    public Optional<E> findById(Object id){
+        return Optional.ofNullable(entityManager.find(entityClass, id));
     }
 
     public void delete(Object id) {

@@ -4,12 +4,14 @@ import io.smallrye.common.annotation.Blocking;
 import io.smallrye.common.annotation.NonBlocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.model.ApiCategory;
 import org.smartbar.backoffice.resources.CategoriesResource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -34,7 +36,11 @@ public class CategoriesResourceImpl implements CategoriesResource {
     @Blocking
     @Override
     public ApiCategory categoriesCategoryIdGet(Long categoryId) {
-        return mapper.toDto(categoriesService.findById(categoryId));
+        Optional<Category> category = categoriesService.findById(categoryId);
+        if(category.isEmpty()){
+            throw new NotFoundException("Category not found");
+        }
+        return mapper.toDto(category.get());
     }
 
     @Blocking

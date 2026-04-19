@@ -1,14 +1,19 @@
 package org.smartbar.backoffice.catgories;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
 import org.smartbar.backoffice.BaseEntity;
 import org.smartbar.backoffice.model.ApiCategory;
 
 
 @Entity
-@jakarta.persistence.Table(name = "bo_category")
+@jakarta.persistence.Table(name = "bo_category", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+})
 public class Category extends BaseEntity {
 
+    @NotNull
     private String name;
     private String description;
 

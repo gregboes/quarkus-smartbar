@@ -3,12 +3,14 @@ package org.smartbar.backoffice.tables;
 import io.smallrye.common.annotation.Blocking;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import org.smartbar.backoffice.model.ApiTable;
 import org.smartbar.backoffice.resources.TablesResource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -58,8 +60,11 @@ public class TablesResourceImpl implements TablesResource {
     @Blocking
     @Override
     public ApiTable tablesTableIdGet(Long tableId) {
-        Table table = tablesService.findById(tableId);
-        return mapper.toDto(table);
+        Optional<Table> table = tablesService.findById(tableId);
+        if(table.isEmpty()){
+            throw new NotFoundException("Table not found");
+        }
+        return mapper.toDto(table.get());
     }
 
     @Blocking
