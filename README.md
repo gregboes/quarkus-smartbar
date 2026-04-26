@@ -28,7 +28,9 @@ classDiagram
 
 ```
 
-
+# SWAGGER UI :
+http://localhost:8080/q/dev
+Onglet endpoits puis http://localhost:8080/q/swagger-ui
 
 # code-with-quarkus
 

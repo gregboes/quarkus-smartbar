@@ -1,0 +1,1 @@
+INSERT INTO bo_category values(1000, 'Coffee', 'Coffee');
